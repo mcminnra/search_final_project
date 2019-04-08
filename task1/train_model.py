@@ -38,6 +38,7 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 # Epoch 00006: early stopping
 # Training Accuracy: 0.9978
 # Testing Accuracy:  0.9973
+# Best val_loss: .0097
 # just 100 dense layer
 
 # Params
@@ -55,10 +56,10 @@ model.add(
 )
 model.add(layers.Conv1D(128, 5, activation='relu'))
 model.add(layers.GlobalMaxPool1D())
-#model.add(layers.Dense(100, activation="relu"))
-model.add(layers.Dense(128, activation="relu"))
-model.add(layers.Dropout(0.2))
-model.add(layers.Dense(64, activation="relu"))
+model.add(layers.Dense(100, activation="relu"))
+#model.add(layers.Dense(128, activation="relu"))
+#model.add(layers.Dropout(0.2))
+#model.add(layers.Dense(64, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
