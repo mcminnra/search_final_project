@@ -1,8 +1,3 @@
-# User-Defined
-final_project.pptx
-data/*
-task1/obj/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
