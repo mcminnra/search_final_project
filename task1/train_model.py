@@ -66,7 +66,7 @@ model.add(
 )
 model.add(layers.Conv1D(128, 5, activation='relu'))
 model.add(layers.MaxPooling1D(2))
-model.add(layers.lstm(100))
+model.add(layers.LSTM(100))
 model.add(layers.Dense(100, activation="relu"))
 #model.add(layers.Dense(128, activation="relu"))
 #model.add(layers.Dropout(0.2))
