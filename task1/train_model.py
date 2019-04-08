@@ -40,6 +40,16 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 # Testing Accuracy:  0.9973
 # Best val_loss: .0096
 # just 100 dense layer
+# model = Sequential()
+# model.add(
+#     layers.Embedding(
+#         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
+#     )
+# )
+# model.add(layers.Conv1D(128, 5, activation='relu'))
+# model.add(layers.GlobalMaxPool1D())
+# model.add(layers.Dense(100, activation="relu"))
+# model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 # Params
 vocab_size = params.item().get('vocab_size')
@@ -55,9 +65,8 @@ model.add(
     )
 )
 model.add(layers.Conv1D(128, 5, activation='relu'))
-model.add(layers.MaxPooling1D(3))
-model.add(layers.Conv1D(64, 3, activation='relu'))
-model.add(layers.GlobalMaxPool1D())
+model.add(layers.MaxPooling1D(2))
+model.add(layers.lstm(100))
 model.add(layers.Dense(100, activation="relu"))
 #model.add(layers.Dense(128, activation="relu"))
 #model.add(layers.Dropout(0.2))
