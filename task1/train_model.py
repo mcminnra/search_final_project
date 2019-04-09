@@ -54,7 +54,7 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 # Params
 vocab_size = params.item().get('vocab_size')
 maxlen = params.item().get('maxlen')
-embedding_dim = 100  # 50 best
+embedding_dim = 50 
 output_dim = y_train.shape[1]  # Number of labels (1300)
 
 model = Sequential()
@@ -65,7 +65,7 @@ model.add(
 )
 model.add(layers.Conv1D(128, 5, activation='relu'))
 model.add(layers.GlobalMaxPool1D())
-model.add(layers.Dense(100, activation="relu"))
+model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
