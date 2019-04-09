@@ -108,14 +108,15 @@ print("Testing Accuracy:  {:.4f}\n".format(accuracy))
 print("--Real X--")
 pred_real = model.predict(real_X)
 for bus_id, row in zip(real[:, 0], pred_real):
-    ind = np.argpartition(row, -3)[-3:]
+    ind = np.argpartition(row, -10)[-10:]
     sorted_ind = ind[np.argsort(row[ind])][::-1]
-    top_3 = zip(categories[sorted_ind], row[sorted_ind])
+    top_10 = zip(categories[sorted_ind], row[sorted_ind])
 
     name = business["name"][business["business_id"] == bus_id].iloc[0]
     city = business["city"][business["business_id"] == bus_id].iloc[0]
     state = business["state"][business["business_id"] == bus_id].iloc[0]
     print(f"{name} - {city}, {state}")
-    for cat, cat_pred in top_3:
-        print(f"{cat}: {np.round(cat_pred, 4)}")
+    for cat, cat_pred in top_10:
+        if cat_pred >= .50:
+            print(f"{cat}: {np.round(cat_pred, 4)}")
     print()
