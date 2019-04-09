@@ -20,6 +20,7 @@ Todo:
 - look at better neural network structure
 - Maybe look into batches for training data
 - Maybe casual padding on 1d convolution
+- glove word embedding?
 
 ## Task 2
 Deep Matrix Factorization
