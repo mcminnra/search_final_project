@@ -49,11 +49,15 @@ for k, v in top_25_categories:
     print(f"{k}: {v}")
 print()
 
-# Merge categories into reviews
-merge_df = business[["business_id", "categories"]]
+# Merge business into reviews
+merge_df = business[["business_id", "name", "categories"]]
 review = review.merge(merge_df, on="business_id", how="left")
-review = review[["business_id", "text", "categories"]]
+review = review[["business_id", "name", "text", "categories"]]
 del business
+
+# Add business name to review
+review['text'] = review['name'] + ' ' + review['text']
+review = review.drop(['name'], axis=1)
 
 # Convert Reviews Categories to OneHotEncoding
 for index, row in tqdm(
