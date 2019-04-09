@@ -96,7 +96,7 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
-model.add(layers.Conv1D(256, 5, activation="relu"))
+model.add(layers.Conv1D(128, 5, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
@@ -109,7 +109,7 @@ if not os.path.exists("weights/"):
     os.makedirs("weights/")
 checkpoint = ModelCheckpoint(
     "weights/model.h5",
-    monitor="val_acc",
+    monitor="val_f1",
     verbose=1,
     save_best_only=True,
     save_weights_only=False,
@@ -117,7 +117,7 @@ checkpoint = ModelCheckpoint(
     period=1,
 )
 early = EarlyStopping(
-    monitor="val_loss", min_delta=0, patience=2, verbose=1, mode="auto"
+    monitor="val_f1", min_delta=0, patience=2, verbose=1, mode="auto"
 )
 
 # Train Model
@@ -132,9 +132,9 @@ history = model.fit(
 )
 
 # Results
-loss, accuracy = model.evaluate(X_train, y_train, verbose=False)
+loss, accuracy, f1 = model.evaluate(X_train, y_train, verbose=False)
 print("Training Accuracy: {:.4f}".format(accuracy))
-loss, accuracy = model.evaluate(X_val, y_val, verbose=False)
+loss, accuracy, f1 = model.evaluate(X_val, y_val, verbose=False)
 print("Testing Accuracy:  {:.4f}\n".format(accuracy))
 
 # Get Predictions on real_X (reviews that go to a business with no categories)
