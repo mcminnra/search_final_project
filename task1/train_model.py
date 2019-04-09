@@ -96,8 +96,9 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
-model.add(layers.Conv1D(128, 5, activation="relu", padding='causal'))
+model.add(layers.Conv1D(128, 5, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
+model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
