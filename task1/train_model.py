@@ -36,10 +36,9 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 
 # Model
 # Epoch 00006: early stopping
-# Training Accuracy: 0.9978
+# Training Accuracy: 0.9976
 # Testing Accuracy:  0.9973
-# Best val_loss: .0096
-# just 100 dense layer
+# Best val_loss: .0094
 # model = Sequential()
 # model.add(
 #     layers.Embedding(
@@ -48,13 +47,13 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 # )
 # model.add(layers.Conv1D(128, 5, activation='relu'))
 # model.add(layers.GlobalMaxPool1D())
-# model.add(layers.Dense(100, activation="relu"))
+# model.add(layers.Dense(1000, activation="relu"))
 # model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 # Params
-vocab_size = params.item().get('vocab_size')
-maxlen = params.item().get('maxlen')
-embedding_dim = 50 
+vocab_size = params.item().get("vocab_size")
+maxlen = params.item().get("maxlen")
+embedding_dim = 50
 output_dim = y_train.shape[1]  # Number of labels (1300)
 
 model = Sequential()
@@ -63,7 +62,7 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
-model.add(layers.Conv1D(128, 5, activation='relu'))
+model.add(layers.Conv1D(128, 5, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
@@ -110,13 +109,19 @@ pred_real = model.predict(real_X)
 for bus_id, row in zip(real[:, 0], pred_real):
     ind = np.argpartition(row, -10)[-10:]
     sorted_ind = ind[np.argsort(row[ind])][::-1]
-    top_10 = zip(categories[sorted_ind], row[sorted_ind])
+    top_10 = [
+        (cat, cat_pred)
+        for cat, cat_pred in zip(categories[sorted_ind], row[sorted_ind])
+        if cat_pred >= 0.50
+    ]
 
     name = business["name"][business["business_id"] == bus_id].iloc[0]
     city = business["city"][business["business_id"] == bus_id].iloc[0]
     state = business["state"][business["business_id"] == bus_id].iloc[0]
     print(f"{name} - {city}, {state}")
-    for cat, cat_pred in top_10:
-        if cat_pred >= .50:
+    if top_10:
+        for cat, cat_pred in top_10:
             print(f"{cat}: {np.round(cat_pred, 4)}")
-    print()
+        print()
+    else:
+        print('?\n')
