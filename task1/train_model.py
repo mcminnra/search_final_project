@@ -119,7 +119,7 @@ checkpoint = ModelCheckpoint(
     period=1,
 )
 early = EarlyStopping(
-    monitor="val_loss", min_delta=0, patience=2, verbose=1, mode="auto"
+    monitor="val_loss", min_delta=0, patience=5, verbose=1, mode="auto"
 )
 
 # Train Model
