@@ -68,10 +68,10 @@ end_time = np.round(time.time() - start_time, 2)
 print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 
 # Model
-# Epoch 00006: early stopping
-# Training Accuracy: 0.9976
-# Testing Accuracy:  0.9973
-# Best val_loss: .0094
+# Epoch 00008: early stopping
+# Training Accuracy: 0.9987
+# Testing Accuracy:  0.9981
+# Best val_loss: .0066
 # model = Sequential()
 # model.add(
 #     layers.Embedding(
@@ -96,7 +96,9 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
+model.add(layers.Conv1D(128, 7, activation="relu"))
 model.add(layers.Conv1D(128, 5, activation="relu"))
+model.add(layers.Conv1D(128, 3, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
