@@ -98,7 +98,7 @@ model.add(
 )
 model.add(layers.Conv1D(128, 5, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
-model.add(layers.Dense(1000, activation="relu"))
+model.add(layers.Dense(1500, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy", f1])
@@ -109,7 +109,7 @@ if not os.path.exists("weights/"):
     os.makedirs("weights/")
 checkpoint = ModelCheckpoint(
     "weights/model.h5",
-    monitor="val_f1",
+    monitor="val_loss",
     verbose=1,
     save_best_only=True,
     save_weights_only=False,
@@ -117,7 +117,7 @@ checkpoint = ModelCheckpoint(
     period=1,
 )
 early = EarlyStopping(
-    monitor="val_f1", min_delta=0, patience=2, verbose=1, mode="auto"
+    monitor="val_loss", min_delta=0, patience=2, verbose=1, mode="auto"
 )
 
 # Train Model
