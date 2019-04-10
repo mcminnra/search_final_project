@@ -118,7 +118,7 @@ checkpoint = ModelCheckpoint(
     period=1,
 )
 early = EarlyStopping(
-    monitor="val_loss", min_delta=0, patience=5, verbose=1, mode="auto"
+    monitor="val_loss", min_delta=0, patience=15, verbose=1, mode="auto"
 )
 
 # Train Model
@@ -141,25 +141,25 @@ print("Training - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 loss, accuracy = model.evaluate(X_val, y_val, verbose=False)
 print("Validation - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 
-# Get Predictions on real_X (reviews that go to a business with no categories)
-print("--Real X--")
-pred_real = model.predict(real_X)
-for bus_id, row in zip(real[:, 0], pred_real):
-    ind = np.argpartition(row, -10)[-10:]
-    sorted_ind = ind[np.argsort(row[ind])][::-1]
-    top_10 = [
-        (cat, cat_pred)
-        for cat, cat_pred in zip(categories[sorted_ind], row[sorted_ind])
-        if cat_pred >= 0.50
-    ]
+# # Get Predictions on real_X (reviews that go to a business with no categories)
+# print("--Real X--")
+# pred_real = model.predict(real_X)
+# for bus_id, row in zip(real[:, 0], pred_real):
+#     ind = np.argpartition(row, -10)[-10:]
+#     sorted_ind = ind[np.argsort(row[ind])][::-1]
+#     top_10 = [
+#         (cat, cat_pred)
+#         for cat, cat_pred in zip(categories[sorted_ind], row[sorted_ind])
+#         if cat_pred >= 0.50
+#     ]
 
-    name = business["name"][business["business_id"] == bus_id].iloc[0]
-    city = business["city"][business["business_id"] == bus_id].iloc[0]
-    state = business["state"][business["business_id"] == bus_id].iloc[0]
-    print(f"{name} - {city}, {state}")
-    if top_10:
-        for cat, cat_pred in top_10:
-            print(f"{cat}: {np.round(cat_pred, 4)}")
-        print()
-    else:
-        print('?\n')
+#     name = business["name"][business["business_id"] == bus_id].iloc[0]
+#     city = business["city"][business["business_id"] == bus_id].iloc[0]
+#     state = business["state"][business["business_id"] == bus_id].iloc[0]
+#     print(f"{name} - {city}, {state}")
+#     if top_10:
+#         for cat, cat_pred in top_10:
+#             print(f"{cat}: {np.round(cat_pred, 4)}")
+#         print()
+#     else:
+#         print('?\n')
