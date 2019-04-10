@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras import backend as K
 from tensorflow.keras import layers
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
@@ -131,6 +131,9 @@ history = model.fit(
     validation_data=(X_val, y_val),
     callbacks=[checkpoint, early],
 )
+
+# Load Best Weights
+model = load_model('weights/model.h5')
 
 # Results
 loss, accuracy, f1 = model.evaluate(X_train, y_train, verbose=False)
