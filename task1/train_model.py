@@ -102,7 +102,7 @@ model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy", f1])
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 model.summary()
 
 # Training Callbacks
@@ -136,10 +136,10 @@ history = model.fit(
 model = load_model('weights/model.h5')
 
 # Results
-loss, accuracy, f1 = model.evaluate(X_train, y_train, verbose=False)
-print("Training - Acc: {:.4f}, Loss: {:.4f}, F1: {:.4f}".format(accuracy, loss, f1))
-loss, accuracy, f1 = model.evaluate(X_val, y_val, verbose=False)
-print("Validation - Acc: {:.4f}, Loss: {:.4f}, F1: {:.4f}".format(accuracy, loss, f1))
+loss, accuracy = model.evaluate(X_train, y_train, verbose=False)
+print("Training - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
+loss, accuracy = model.evaluate(X_val, y_val, verbose=False)
+print("Validation - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 
 # Get Predictions on real_X (reviews that go to a business with no categories)
 print("--Real X--")
