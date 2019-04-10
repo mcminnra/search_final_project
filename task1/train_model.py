@@ -14,6 +14,7 @@ from tensorflow.keras.models import Sequential
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 
+
 # f1 metric
 def f1(y_true, y_pred):
     def recall(y_true, y_pred):
@@ -96,9 +97,7 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
-model.add(layers.Conv1D(128, 7, activation="relu"))
-model.add(layers.Conv1D(128, 5, activation="relu"))
-model.add(layers.Conv1D(128, 3, activation="relu"))
+model.add(layers.Conv1D(128, 5, activation='relu'))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
@@ -135,9 +134,9 @@ history = model.fit(
 
 # Results
 loss, accuracy, f1 = model.evaluate(X_train, y_train, verbose=False)
-print("Training Accuracy: {:.4f}".format(accuracy))
+print("Training - Acc: {:.4f}, Loss: {:.4f}, F1: {:.4f}".format(accuracy, loss, f1))
 loss, accuracy, f1 = model.evaluate(X_val, y_val, verbose=False)
-print("Testing Accuracy:  {:.4f}\n".format(accuracy))
+print("Validation - Acc: {:.4f}, Loss: {:.4f}, F1: {:.4f}".format(accuracy, loss, f1))
 
 # Get Predictions on real_X (reviews that go to a business with no categories)
 print("--Real X--")

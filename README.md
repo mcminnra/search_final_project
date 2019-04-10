@@ -10,16 +10,15 @@ Done:
 - [X] Train on reviews to learn multi-lbael categories
 - [X] then from real world reviews about a business with no categories, you can suggest some. 
 - [X] Maybe look into Embedding then CNN/LSTM
+- [X] add title to text
 
 Todo:
 - is there a better metric than accuracy?
-- add title to text
 - Make Preds on val (or at least some subset)
 - Maybe add tips?
 - Maybe switch to lemmization?
 - look at better neural network structure
 - Maybe look into batches for training data
-- Maybe casual padding on 1d convolution
 - glove word embedding?
 
 ## Task 2
