@@ -70,9 +70,8 @@ print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
 
 # Model
 # Epoch 00008: early stopping
-# Training Accuracy: 0.9987
-# Testing Accuracy:  0.9981
-# Best val_loss: .0066
+# Training - Acc: 0.9986, Loss: 0.0043
+# Validation - Acc: 0.9981, Loss: 0.0066
 # model = Sequential()
 # model.add(
 #     layers.Embedding(
@@ -100,6 +99,7 @@ model.add(
 model.add(layers.Conv1D(128, 5, activation='relu'))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
+model.add(layers.Dropout(.2))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
