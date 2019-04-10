@@ -7,7 +7,7 @@ Multi-Label Text Classification
 
 Done:
 - [X] Each Review apply categories + business name
-- [X] Train on reviews to learn multi-lbael categories
+- [X] Train on reviews to learn multi-label categories
 - [X] then from real world reviews about a business with no categories, you can suggest some. 
 - [X] Maybe look into Embedding then CNN/LSTM
 - [X] add title to text
@@ -20,6 +20,7 @@ Todo:
 - look at better neural network structure
 - Maybe look into batches for training data
 - glove word embedding?
+- N-Gram features?
 
 ## Task 2
 Deep Matrix Factorization

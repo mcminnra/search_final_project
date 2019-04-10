@@ -42,9 +42,10 @@ def f1(y_true, y_pred):
         predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
         precision = true_positives / (predicted_positives + K.epsilon())
         return precision
+
     precision = precision(y_true, y_pred)
     recall = recall(y_true, y_pred)
-    return 2*((precision*recall)/(precision+recall+K.epsilon()))
+    return 2 * ((precision * recall) / (precision + recall + K.epsilon()))
 
 
 # Load Data
@@ -62,11 +63,14 @@ end_time = np.round(time.time() - start_time, 2)
 print(f"Loading data...DONE! [{end_time} seconds]")
 
 # Train Validation Split
-print("Creating Train/Validation Set...", end="\r")
+print("Creating Train/Validation/Test Set...", end="\r")
 start_time = time.time()
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_train, y_train, test_size=0.20, random_state=42
+)
 end_time = np.round(time.time() - start_time, 2)
-print(f"Creating Train/Validation Set...DONE! [{end_time} seconds]")
+print(f"Creating Train/Validation/Test Set...DONE! [{end_time} seconds]")
 
 # Model
 # Epoch 00008: early stopping
@@ -96,10 +100,9 @@ model.add(
         input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen
     )
 )
-model.add(layers.Conv1D(128, 5, activation='relu'))
+model.add(layers.Conv1D(128, 5, activation="relu"))
 model.add(layers.GlobalMaxPool1D())
 model.add(layers.Dense(1000, activation="relu"))
-model.add(layers.Dropout(.2))
 model.add(layers.Dense(output_dim, activation="sigmoid"))
 
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
@@ -133,13 +136,15 @@ history = model.fit(
 )
 
 # Load Best Weights
-model = load_model('weights/model.h5')
+model = load_model("weights/model.h5")
 
 # Results
 loss, accuracy = model.evaluate(X_train, y_train, verbose=False)
 print("Training - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 loss, accuracy = model.evaluate(X_val, y_val, verbose=False)
 print("Validation - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
+loss, accuracy = model.evaluate(X_test, y_test, verbose=False)
+print("Testing - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 
 # # Get Predictions on real_X (reviews that go to a business with no categories)
 # print("--Real X--")
