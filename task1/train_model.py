@@ -68,14 +68,16 @@ start_time = time.time()
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.20, random_state=42
 )
-X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.20, random_state=42)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train, y_train, test_size=0.20, random_state=42
+)
 end_time = np.round(time.time() - start_time, 2)
 print(f"Creating Train/Validation/Test Set...DONE! [{end_time} seconds]")
 
 # Model
-# Epoch 00008: early stopping
-# Training - Acc: 0.9986, Loss: 0.0043
-# Validation - Acc: 0.9981, Loss: 0.0066
+# Training - Acc: 0.9985, Loss: 0.0044
+# Validation - Acc: 0.9980, Loss: 0.0070
+# Testing - Acc: 0.9980, Loss: 0.0069
 # model = Sequential()
 # model.add(
 #     layers.Embedding(

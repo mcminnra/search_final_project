@@ -3,7 +3,7 @@
 edit bashrc for which gpu to use
 
 ## Task 1
-Multi-Label Text Classification
+Multi-Label Text Classification via Word Embeddings + CNN Binary-Crossentropy
 
 Done:
 - [X] Each Review apply categories + business name
@@ -20,7 +20,18 @@ Todo:
 - look at better neural network structure
 - Maybe look into batches for training data
 - glove word embedding?
-- N-Gram features?
+- N-Gram features? (Takes a long time to preprocesss)
+- Skip-Gram features?
+
+Benchmarks
+- CNN+Stemming
+- CNN+Lemma
+- CNN+NOWordProcess
+- CNN+GloveEmbeddings
+
+
+Cites:
+- https://www.aclweb.org/anthology/D14-1181
 
 ## Task 2
 Deep Matrix Factorization
