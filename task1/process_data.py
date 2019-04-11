@@ -101,9 +101,9 @@ review["text"] = review["text"].apply(
     lambda x: [item for item in x if item not in stop]
 )
 
-# SnowballStemmer
-# stemmer = SnowballStemmer("english")
-# review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
+# SnowballStemmer (Best)
+stemmer = SnowballStemmer("english")
+review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
 
 # Lemmatization
 # lemmatizer = WordNetLemmatizer()

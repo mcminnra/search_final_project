@@ -39,6 +39,11 @@ Training - Acc: 0.9984, Loss: 0.0048
 Validation - Acc: 0.9979, Loss: 0.0071
 Testing - Acc: 0.9980, Loss: 0.0070
 - CNN+NOWordNormalization
+Total Processing Time: 1654.51 seconds
+Total Training Time: 891.55 seconds
+Training - Acc: 0.9984, Loss: 0.0047
+Validation - Acc: 0.9980, Loss: 0.0071
+Testing - Acc: 0.9980, Loss: 0.0071
 
 Benchmarks (Pretrained embeddings)
 - CNN+NoPretrained
