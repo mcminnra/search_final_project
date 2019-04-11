@@ -78,9 +78,6 @@ end_time = np.round(time.time() - start_time, 2)
 print(f"Creating Train/Validation/Test Set...DONE! [{end_time} seconds]")
 
 # Model
-# Training - Acc: 0.9985, Loss: 0.0044
-# Validation - Acc: 0.9980, Loss: 0.0070
-# Testing - Acc: 0.9980, Loss: 0.0069
 # model = Sequential()
 # model.add(
 #     layers.Embedding(

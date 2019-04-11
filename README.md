@@ -11,24 +11,36 @@ Done:
 - [X] then from real world reviews about a business with no categories, you can suggest some. 
 - [X] Maybe look into Embedding then CNN/LSTM
 - [X] add title to text
+- [X] Maybe switch to lemmization?
+- [X] N-Gram features? (Takes an unrealistically long time to processs)
+- [X] Skip-Gram features (Would assume the same about these as N-Grams)
 
 Todo:
 - is there a better metric than accuracy?
 - Make Preds on val (or at least some subset)
 - Maybe add tips?
-- Maybe switch to lemmization?
 - look at better neural network structure
 - Maybe look into batches for training data
 - glove word embedding?
-- N-Gram features? (Takes a long time to preprocesss)
-- Skip-Gram features?
+- Million training data?
 
-Benchmarks
-- CNN+Stemming
-- CNN+Lemma
-- CNN+NOWordProcess
+Benchmarks (Normalization)
+Training on single Titan X GPU with 200,000 sampled reviews
+- CNN+SnowballStemming
+Training - Acc: 0.9985, Loss: 0.0044
+Validation - Acc: 0.9980, Loss: 0.0070
+Testing - Acc: 0.9980, Loss: 0.0069
+- CNN+WordNetLemmatization
+Total Processing Time: 1506.33 seconds
+Total Training Time: 874.52 seconds
+Training - Acc: 0.9984, Loss: 0.0048
+Validation - Acc: 0.9979, Loss: 0.0071
+Testing - Acc: 0.9980, Loss: 0.0070
+- CNN+NOWordNormalization
+
+Benchmarks (Pretrained embeddings)
+- CNN+NoPretrained
 - CNN+GloveEmbeddings
-
 
 Cites:
 - https://www.aclweb.org/anthology/D14-1181

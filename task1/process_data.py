@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
-import itertools
 import os
 import string
 import time
 
-import nltk
 import numpy as np
 import pandas as pd
 from keras.preprocessing.sequence import pad_sequences
@@ -104,14 +102,14 @@ review["text"] = review["text"].apply(
 )
 
 # SnowballStemmer
-# stemmer = SnowballStemmer("english")
-# review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
+stemmer = SnowballStemmer("english")
+review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
 
 # Lemmatization
-lemmatizer = WordNetLemmatizer()
-review["text"] = review["text"].apply(
-    lambda x: [lemmatizer.lemmatize(item) for item in x]
-)
+# lemmatizer = WordNetLemmatizer()
+# review["text"] = review["text"].apply(
+#     lambda x: [lemmatizer.lemmatize(item) for item in x]
+# )
 
 # Drop reviews that have no categories
 real = review[review["categories"].isna()]
