@@ -2,6 +2,7 @@
 final_project.pptx
 data/*
 task1/obj/
+*/weights/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -15,22 +15,8 @@ from nltk.stem.snowball import SnowballStemmer
 from nltk.stem import WordNetLemmatizer
 from tqdm import tqdm
 
-
-# https://docs.python.org/3.6/library/itertools.html#itertools.zip_longest
-def roundrobin(*iterables):
-    "roundrobin('ABC', 'D', 'EF') --> A D E B F C"
-    # Recipe credited to George Sakkis
-    num_active = len(iterables)
-    nexts = itertools.cycle(iter(it).__next__ for it in iterables)
-    while num_active:
-        try:
-            for next in nexts:
-                yield next()
-        except StopIteration:
-            # Remove the iterator we just exhausted from the cycle.
-            num_active -= 1
-            nexts = itertools.cycle(itertools.islice(nexts, num_active))
-
+# Start total file time
+file_time = time.time()
 
 # Read Data
 print("Loading data...", end="\r")
@@ -127,13 +113,6 @@ review["text"] = review["text"].apply(
     lambda x: [lemmatizer.lemmatize(item) for item in x]
 )
 
-# Generate Injected bigrams
-# review["text"] = review["text"].apply(
-#     lambda x: [
-#         item for item in roundrobin(x, [w1 + w2 for w1, w2 in nltk.bigrams(x)])
-#     ]
-# )
-
 # Drop reviews that have no categories
 real = review[review["categories"].isna()]
 review = review[review["categories"].notnull()]
@@ -195,3 +174,6 @@ np.save(directory + "real.npy", real)
 np.save(directory + "params.npy", params)
 end_time = np.round(time.time() - start_time, 2)
 print(f"Saving data...DONE! [{end_time} seconds]")
+
+end_time = np.round(time.time() - file_time, 2)
+print(f"Total Processing Time: {end_time} seconds")
