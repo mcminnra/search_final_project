@@ -27,7 +27,9 @@ Todo:
 Benchmarks (Normalization)
 Training on single Titan X GPU with 200,000 sampled reviews
 - CNN+SnowballStemming
-Training - Acc: 0.9985, Loss: 0.0044
+Total Processing Time: 1263.51 seconds
+Total Training Time: 813.04 seconds
+Training - Acc: 0.9984, Loss: 0.0048
 Validation - Acc: 0.9980, Loss: 0.0070
 Testing - Acc: 0.9980, Loss: 0.0069
 - CNN+WordNetLemmatization

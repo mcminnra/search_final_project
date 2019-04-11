@@ -102,8 +102,8 @@ review["text"] = review["text"].apply(
 )
 
 # SnowballStemmer
-stemmer = SnowballStemmer("english")
-review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
+# stemmer = SnowballStemmer("english")
+# review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in x])
 
 # Lemmatization
 # lemmatizer = WordNetLemmatizer()
