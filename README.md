@@ -24,6 +24,10 @@ Todo:
 - glove word embedding?
 - Million training data?
 
+1000000 Reviews:
+approach: CNN+SnowballStemming
+Total Processing Time: 13210.18 seconds (about 3 hours and 45 min)
+
 Benchmarks (Normalization)
 Training on single Titan X GPU with 200,000 sampled reviews
 - CNN+SnowballStemming

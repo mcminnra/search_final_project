@@ -148,6 +148,16 @@ print("Validation - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 loss, accuracy = model.evaluate(X_test, y_test, verbose=False)
 print("Testing - Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
 
+print("Saving test data...", end="\r")
+start_time = time.time()
+directory = "obj/"
+if not os.path.exists(directory):
+    os.makedirs(directory)
+np.save(directory + "X_test.npy", X_test)
+np.save(directory + "y_test.npy", y_test)
+end_time = np.round(time.time() - start_time, 2)
+print(f"Saving test data...DONE! [{end_time} seconds]")
+
 end_time = np.round(time.time() - file_time, 2)
 print(f"Total Training Time: {end_time} seconds")
 
