@@ -10,7 +10,7 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
-from nltk.stem import WordNetLemmatizer
+from nltk.stem import WordNetLemmatizer # noqa
 from tqdm import tqdm
 
 # Start total file time
@@ -20,7 +20,8 @@ file_time = time.time()
 print("Loading data...", end="\r")
 start_time = time.time()
 business = pd.read_json("../data/business.json", lines=True)
-# review = pd.read_json("../data/samp_review.json", lines=True)
+# review = pd.read_json("../data/review_1000.json", lines=True)
+# review = pd.read_json("../data/review_200000.json", lines=True)
 review = pd.read_json("../data/review_1000000.json", lines=True)
 end_time = np.round(time.time() - start_time, 2)
 print(f"Loading data...DONE! [{end_time} seconds]")
@@ -115,6 +116,7 @@ review["text"] = review["text"].apply(lambda x: [stemmer.stem(item) for item in 
 # Drop reviews that have no categories
 real = review[review["categories"].isna()]
 review = review[review["categories"].notnull()]
+ids = review['business_id']
 
 # Convert to numpy matrix
 review_text = np.array(review["text"].values)
@@ -165,11 +167,12 @@ start_time = time.time()
 directory = "obj/"
 if not os.path.exists(directory):
     os.makedirs(directory)
+np.save(directory + "ids.npy", ids)
 np.save(directory + "X.npy", X)
 np.save(directory + "y.npy", y)
 np.save(directory + "real_X.npy", real_X)
-np.save(directory + "categories.npy", categories)
 np.save(directory + "real.npy", real)
+np.save(directory + "categories.npy", categories)
 np.save(directory + "params.npy", params)
 end_time = np.round(time.time() - start_time, 2)
 print(f"Saving data...DONE! [{end_time} seconds]")
