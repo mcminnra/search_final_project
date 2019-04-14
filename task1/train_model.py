@@ -5,9 +5,9 @@ import time
 
 import numpy as np
 from sklearn.model_selection import train_test_split
-from keras import layers
-from keras.callbacks import EarlyStopping, ModelCheckpoint
-from keras.models import Sequential, load_model
+from tensorflow.keras import layers
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.keras.models import Sequential, load_model
 
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"

@@ -6,8 +6,8 @@ import time
 
 import numpy as np
 import pandas as pd
-from keras.preprocessing.sequence import pad_sequences
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 from nltk.stem import WordNetLemmatizer # noqa

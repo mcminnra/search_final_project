@@ -4,7 +4,7 @@ import time
 
 import numpy as np
 import pandas as pd
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 # Load data
 print("Loading data...", end="\r")
