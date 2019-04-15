@@ -1,6 +1,6 @@
 tensorflow
 pandas
 numpy
-sklearn
+scikit-learn
 nltk
 tqdm
