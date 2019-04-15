@@ -56,6 +56,8 @@ for bus_id, y_pred, y_sample in zip(ids_sample, y_preds, y_samples):
     name_real = [x[0] for x in cat_real]
     percent_overlap = np.round(len(set(name_pred) & set(name_real))/len(name_real), 4)
    
+
+    print(f'Name: {name}')
     print(f'Predicted Categories: {name_pred}')
     print(f'Real Categories: {name_real}')
     print(f'Percent Overlap: {percent_overlap}\n')
