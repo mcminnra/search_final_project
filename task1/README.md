@@ -3,14 +3,17 @@
 ## How to run
 First, Process data. This is merges business and reviews plus does various NLP tasks to prep the reviews.
 ```bash
+make data
 ```
 
 Then, train the model
 ```bash
+make train
 ```
 
 There is a script that makes predictions on a subsample of the test set to see how well it performs.
 ```bash
+make samples
 ```
 
 ## Results
