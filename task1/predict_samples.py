@@ -4,7 +4,7 @@ import time
 
 import numpy as np
 import pandas as pd
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model 
 
 # Load data
 print("Loading data...", end="\r")
@@ -52,8 +52,10 @@ for bus_id, y_pred, y_sample in zip(ids_sample, y_preds, y_samples):
         ],
         key=lambda x: x[1],
     )
-    print(name)
-    
-    print(f'Predicted Categories: {[x[0] for x in cat_pred]}')
-    print(f'Real Categories: {[x[0] for x in cat_real]}\n')
-
+    name_pred = [x[0] for x in cat_pred]
+    name_real = [x[0] for x in cat_real]
+    percent_overlap = np.round(len(set(name_pred)&set(name_real))/len(name_real), 4)
+   
+    print(f'Predicted Categories: {name_pred}')
+    print(f'Real Categories: {name_real}\n')
+    print(f'Percent Overlap: {percent_overlap}')
