@@ -1,7 +1,7 @@
 # User-Defined
 final_project.pptx
 data/*
-task1/obj/
+*/obj/*
 */weights/*
 
 # Byte-compiled / optimized / DLL files

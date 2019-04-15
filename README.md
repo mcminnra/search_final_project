@@ -17,7 +17,7 @@ search_final_project/data
 ```
 [https://www.yelp.com/dataset](https://www.yelp.com/dataset)
 
-## Task 1 - Multi-Label Classification with CNN Network over Word Embeddings
+## Task 1 - Multi-Label Classification with CNN over Word Embeddings
 Goal: Try to predict a business's categories from it's name + reviews.
 
 See [Task 1 README](task1/README.md)
