@@ -116,3 +116,5 @@ Deep Matrix Factorization
 https://pdfs.semanticscholar.org/35e7/4c47cf4b3a1db7c9bfe89966d1c7c0efadd0.pdf?_ga=2.157815098.1290675275.1554405980-1148675878.1554405980
 
 
+todo:
+- transfer full reviewß

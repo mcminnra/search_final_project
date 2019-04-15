@@ -12,7 +12,7 @@ file_time = time.time()
 # Read Data
 print("Loading data...", end="\r")
 start_time = time.time()
-review = pd.read_json("../data/review.json", lines=True)
+review = pd.read_json("../data/review_1000000.json", lines=True)
 user = pd.read_json("../data/user.json", lines=True)
 business = pd.read_json("../data/business.json", lines=True)
 params = {}
