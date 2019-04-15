@@ -11,6 +11,12 @@ How to install dependencies
 pip install -r requirements.txt
 ```
 
+Place Yelp data in data folder in project root
+```
+search_final_project/data
+```
+[https://www.yelp.com/dataset](https://www.yelp.com/dataset)
+
 ## Task 1 - Multi-Label Classification with CNN Network over Word Embeddings
 Goal: Try to predict a business's categories from it's name + reviews.
 
