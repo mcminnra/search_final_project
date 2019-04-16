@@ -89,9 +89,9 @@ history = model.fit(
     [X_user, X_business],
     y,
     epochs=1000,
-    batch_size=25,
+    #batch_size=25,
     #steps_per_epoch=267436,  # Total
-    steps_per_epoch=40000,  # None = Samples/batch_size
+    #steps_per_epoch=40000,  # 1000000
     verbose=True,
     validation_split=0.2,
     callbacks=[checkpoint, early],
