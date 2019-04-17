@@ -81,7 +81,7 @@ checkpoint = ModelCheckpoint(
     period=1,
 )
 early = EarlyStopping(
-    monitor="val_loss", min_delta=0, patience=15, verbose=1, mode="auto"
+    monitor="val_loss", min_delta=0, patience=10, verbose=1, mode="auto"
 )
 
 # Train Model
@@ -90,10 +90,6 @@ history = model.fit(
     y,
     epochs=1000,
     batch_size=25,
-    #steps_per_epoch=267436,  # Total
-    #steps_per_epoch=40000,  # 1000000
-    #validation_steps=8000,  # 1000000
-    #steps_per_epoch=int(np.ceil(len(y)/25)),
     verbose=True,
     validation_split=0.2,
     callbacks=[checkpoint, early],
@@ -103,5 +99,5 @@ history = model.fit(
 model = load_model("weights/model.h5")
 
 # Results
-loss, accuracy = model.evaluate([X_user, X_business], y, verbose=False)
-print("Acc: {:.4f}, Loss: {:.4f}".format(accuracy, loss))
+loss = model.evaluate([X_user, X_business], y, verbose=False)
+print("Train Loss: {:.4f}".format(loss))
