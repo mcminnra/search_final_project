@@ -101,3 +101,6 @@ model = load_model("weights/model.h5")
 # Results
 loss = model.evaluate([X_user, X_business], y, verbose=False)
 print("Train Loss: {:.4f}".format(loss))
+
+end_time = np.round(time.time() - file_time, 2)
+print(f"Total Training Time: {end_time} seconds")

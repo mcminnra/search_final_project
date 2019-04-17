@@ -22,7 +22,7 @@ Goal: Try to predict a business's categories from it's name + reviews.
 
 See [Task 1 README](task1/README.md)
 
-## Task 2 - Deep Matrix Factorization
+## Task 2 - Deep Collabrative Filtering
 Goal: Try to predict a recommend a business based on a user's review score of other businesses. 
 
 See [Task 2 README](task2/README.md)
