@@ -89,7 +89,7 @@ history = model.fit(
     [X_user, X_business],
     y,
     epochs=1000,
-    batch_size=25,
+    #batch_size=25,
     #steps_per_epoch=267436,  # Total
     #steps_per_epoch=40000,  # 1000000
     #validation_steps=8000,  # 1000000
