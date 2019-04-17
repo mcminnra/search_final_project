@@ -61,11 +61,11 @@ business_vecs = layers.Reshape([embedding_size])(business_embedding)
 input_vecs = layers.Concatenate()([user_vecs, business_vecs])
 
 x = layers.Dense(128, activation="relu")(input_vecs)
-y = layers.Dense(1)(x)
+out = layers.Dense(1)(x)
 
-model = Model(inputs=[user_index_input, business_index_input], outputs=y)
+model = Model(inputs=[user_index_input, business_index_input], outputs=out)
 
-model.compile(loss="mse", optimizer="adam", metrics=["mse"])
+model.compile(loss="mse", optimizer="adam")
 model.summary()
 
 # Training Callbacks
@@ -89,10 +89,11 @@ history = model.fit(
     [X_user, X_business],
     y,
     epochs=1000,
-    #batch_size=25,
+    batch_size=25,
     #steps_per_epoch=267436,  # Total
-    steps_per_epoch=40000,  # 1000000
-    validation_steps=8000,  # 1000000
+    #steps_per_epoch=40000,  # 1000000
+    #validation_steps=8000,  # 1000000
+    steps_per_epoch = int(np.ceil(len(y)/25)),
     verbose=True,
     validation_split=0.2,
     callbacks=[checkpoint, early],

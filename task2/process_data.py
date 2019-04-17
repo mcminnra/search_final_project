@@ -18,7 +18,6 @@ business = pd.read_json("../data/business.json", lines=True)
 params = {}
 end_time = np.round(time.time() - start_time, 2)
 print(f"Loading data...DONE! [{end_time} seconds]")
-print()
 
 print("Merging data and creating indices...", end="\r")
 start_time = time.time()
@@ -43,7 +42,6 @@ X_business = review[['business_index']]
 y = review['stars']
 end_time = np.round(time.time() - start_time, 2)
 print(f"Merging data and creating indices...DONE! [{end_time} seconds]")
-print()
 
 print("Saving data...", end="\r")
 start_time = time.time()
