@@ -60,8 +60,12 @@ user_vecs = layers.Reshape([embedding_size])(user_embedding)
 business_vecs = layers.Reshape([embedding_size])(business_embedding)
 input_vecs = layers.Concatenate()([user_vecs, business_vecs])
 
-x = layers.Dense(128, activation="relu")(input_vecs)
-out = layers.Dense(1)(x)
+l1 = layers.Dense(512, activation="relu")(input_vecs)
+l1do = layers.Dropout(.2)(l1)
+l2 = layers.Dense(256, activation="relu")(l1do)
+l2do = layers.Dropout(.2)(l2)
+l3 = layers.Dense(128, activation="relu")(l2do)
+out = layers.Dense(1)(l3)
 
 model = Model(inputs=[user_index_input, business_index_input], outputs=out)
 

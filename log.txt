@@ -122,3 +122,8 @@ https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45530.pdf
 
 todo:
 - transfer full review and users
+
+Single 128 dense:
+Train Loss: 1.6768
+
+512->do(.2)->256->do(.2)->128
