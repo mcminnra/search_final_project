@@ -5,12 +5,18 @@ import time
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import confusion_matrix, matthews_corrcoef
+from sklearn.metrics import (
+    confusion_matrix,
+    precision_score,
+    recall_score,
+    matthews_corrcoef,
+)
 from tensorflow.keras.models import load_model
 from tqdm import tqdm
 
 # Treat Warnings as errors
 import warnings
+
 warnings.filterwarnings("error", category=RuntimeWarning)
 
 # MacOS Fix
@@ -39,15 +45,15 @@ y_preds = np.where(y_preds > 0.5, 1, 0)
 
 num_categories = len(y_preds[0])
 num_samples = len(y_preds)
-print(f'Number of Categories: {num_categories}')
-print(f'Number of Samples: {num_samples}')
+print(f"Number of Categories: {num_categories}")
+print(f"Number of Samples: {num_samples}")
 
 # Precision & Recall
 # Pulled from https://stackoverflow.com/questions/9004172/precision-recall-for-multiclass-multilabel-classification
 precisions = []
 recalls = []
 mccs = []
-for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
+for i in tqdm(range(0, num_categories), desc="Getting Metrics"):
     class_preds = y_preds[:, i]
     class_test = y_test[:, i]
     cm = confusion_matrix(class_test, class_preds)
@@ -59,21 +65,24 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
         fn = int(cm[1][0])
 
         # Precision
-        if tp == 0 and fp == 0:
+        try:
+            precision = precision_score(class_test, class_preds)
+        except RuntimeWarning:
             precision = 0
-        else:
-            precision = tp / (tp + fp)
         precisions.append(precision)
 
         # Recall
-        if tp == 0 and fn == 0:
+        try:
+            recall = recall_score(class_test, class_preds)
+        except RuntimeWarning:
             recall = 0
-        else:
-            recall = tp / (tp + fn)
         recalls.append(recall)
 
         # Matthew's Correlation Coefficient
-        mcc = matthews_corrcoef(class_test, class_preds)
+        try:
+            mcc = matthews_corrcoef(class_test, class_preds)
+        except RuntimeWarning:
+            mcc = 0
         mccs.append(mcc)
     else:
         precisions.append(1)
@@ -88,11 +97,11 @@ avg_mcc = np.mean(mccs)
 loss, accuracy = model.evaluate(X_test, y_test, verbose=False)
 
 # Print Metrics
-print(f'Loss: {loss}')
-print(f'Accuracy: {accuracy}')
-print(f'Average Precisions across all classes: {avg_precision}')
-print(f'Average Recalls across all classes: {avg_recall}')
-print(f'Average MCC across all classes: {avg_mcc}')
+print(f"Loss: {loss}")
+print(f"Accuracy: {accuracy}")
+print(f"Average Precisions across all classes: {avg_precision}")
+print(f"Average Recalls across all classes: {avg_recall}")
+print(f"Average MCC across all classes: {avg_mcc}")
 
 end_time = np.round(time.time() - file_time, 2)
 print(f"Total Training Time: {end_time} seconds")
