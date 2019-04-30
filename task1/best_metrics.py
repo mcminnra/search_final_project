@@ -59,21 +59,16 @@ for i in tqdm(range(0, num_categories), desc="Getting Metrics"):
     cm = confusion_matrix(class_test, class_preds)
 
     if len(cm) != 1:
-        tp = int(cm[0][0])
-        fp = int(cm[0][1])
-        tn = int(cm[1][1])
-        fn = int(cm[1][0])
-
         # Precision
         try:
-            precision = precision_score(class_test, class_preds)
+            precision = precision_score(class_test, class_preds, average='macro')
         except RuntimeWarning:
             precision = 0
         precisions.append(precision)
 
         # Recall
         try:
-            recall = recall_score(class_test, class_preds)
+            recall = recall_score(class_test, class_preds, average='macro')
         except RuntimeWarning:
             recall = 0
         recalls.append(recall)
@@ -99,8 +94,8 @@ loss, accuracy = model.evaluate(X_test, y_test, verbose=False)
 # Print Metrics
 print(f"Loss: {loss}")
 print(f"Accuracy: {accuracy}")
-print(f"Average Precisions across all classes: {avg_precision}")
-print(f"Average Recalls across all classes: {avg_recall}")
+print(f"Average Macro Precisions across all classes: {avg_precision}")
+print(f"Average Macro Recalls across all classes: {avg_recall}")
 print(f"Average MCC across all classes: {avg_mcc}")
 
 end_time = np.round(time.time() - file_time, 2)
