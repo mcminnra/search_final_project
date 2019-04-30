@@ -56,7 +56,6 @@ mccs = []
 for i in tqdm(range(0, num_categories), desc="Getting Metrics"):
     class_preds = y_preds[:, i]
     class_test = y_test[:, i]
-    cm = confusion_matrix(class_test, class_preds)
 
     if len(cm) != 1:
         # Precision
@@ -99,4 +98,4 @@ print(f"Average Macro Recalls across all classes: {avg_recall}")
 print(f"Average MCC across all classes: {avg_mcc}")
 
 end_time = np.round(time.time() - file_time, 2)
-print(f"Total Training Time: {end_time} seconds")
+print(f"Total Metrics Time: {end_time} seconds")

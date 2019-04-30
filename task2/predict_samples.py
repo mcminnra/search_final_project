@@ -52,5 +52,5 @@ X = X.sort_values(by=["ratings_bar"], ascending=False).iloc[:25]
 
 for i, (index, row) in enumerate(X.iterrows()):
     print(
-        f"{i+1}:: {row['name']} ({row['city']}, {row['state']}) - {row['categories']} - {np.round(row['ratings_bar'], 2)}"  # noqa
+        f"{i+1}:: {row['name']} ({row['city']}, {row['state']}) - {np.round(row['ratings_bar'], 2)}"  # noqa
     )

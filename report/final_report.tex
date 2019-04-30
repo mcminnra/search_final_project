@@ -86,7 +86,7 @@ After normalization, we converted our reviews to a sequence of word ids and padd
 
 \subsection*{Approach and Architecture}
 
-Our approach to generating these categories was to use trained word embeddings and then apply a convolution layer over them (See Architecture below)
+Our approach to predicting these categories was to use trained word embeddings and then apply a convolution layer over them (See Architecture below)
 
 \mbox{}\\
 \begin{verbatim}
@@ -113,25 +113,129 @@ Softmax Output(1300 categories)
 \end{verbatim}
 \mbox{}\\
 
-We trained out output layer using Binary Crossentropy loss in order to be able to learn multiple categories (Multi-Label) on output. From personal experience if each text example is short (like a review), and contains natural spoken speech patterns, the best approach is to simply use the above architecture of WordEmbeddings+CNN. I tried added an LSTM layer, but since more reviews were short and contained natural speech, the LSTM had trouble finding key dependencies to remember that would improve performance. The result was significantly increasing training time, while not improving performance. I, also, tried using a simple Multi-Layer Perception with TFIDF, but the feature size grew exponentially large, and made meaningful training impossible. Memory became a huge bottleneck and prohibited using large data sizes for training
+We trained our output layer using Binary Crossentropy loss in order to be able to learn multiple categories (Multi-Label) on output. From personal experience if each text example is short (like a review), and contains natural spoken speech patterns, the best approach is to simply use the above architecture of WordEmbeddings+CNN. I tried to add an LSTM layer, but since most reviews were short and contained natural speech, the LSTM had trouble finding key dependencies to remember that would improve performance. The result was significantly increasing training time, while not improving the loss. I, also, tried using a simple Multi-Layer Perception with TFIDF features, but the feature size grew exponentially large, and made meaningful training impossible. Memory became a huge bottleneck and prohibited using large data sizes for training
 
 \subsection*{Results}
 
-Here you'll see my best model results. I ran out of time to do comparisons to previous iterations and techniques unfortunately. 
+Here you'll see my best model results. I ran out of time to do comparisons to previous iterations and techniques unfortunately. This is taken as an average of each category (class) individually since we used a multi-label approach.  
 
+%% Best Results
+\begin{table}[h!]
+	\begin{center}
+		\caption{Best Results over Test Set of 199934 reviews}
+		\label{tab:table1}
+		\begin{tabular}{l|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+			\textbf{Metrics} & \textbf{Test Set}\\
+			\hline
+			Loss & 0.0048\\
+			Accuracy & 0.9986\\
+			Average Macro Precision &  0.6095\\
+			Average Macro Recall &  0.3601\\
+			Average MCC & 0.4507\\
+		\end{tabular}
+	\end{center}
+\end{table}
 
+In this problem, we want to pay attention to precision more than recall. We care more about trying to predict relevant categories than we care about predicting all the relevant categories. In our case, it's better for a business to be unlabeled than to be mislabeled. If we look at MCC, we can see our model performs well, but there is quite a bit of room for improvement. Below there is a random sample of businesses and our predicted categories for them. 
 
-\subsection*{Final Results}
+\begin{verbatim}
+Predicted Categories: ['Restaurants']
+Real Categories: 
+['Restaurants', 'Seafood', 'Steakhouses']
+
+Name: Ah-So Sushi & Steak
+Predicted Categories: 
+['Sushi Bars', 'Steakhouses',
+ 'Japanese', 'Restaurants']
+Real Categories: ['Japanese', 'Restaurants']
+
+Name: Chang's Hong Kong Cuisine
+Predicted Categories: 
+['Cantonese', 'Diners', 'Seafood', 
+'Dim Sum', 'Chinese', 'Restaurants']
+Real Categories: 
+['Cantonese', 'Chinese', 'Dim Sum', 
+'Diners', 'Restaurants', 'Seafood']
+
+Name: Sushi Wa
+Predicted Categories: 
+['Japanese', 'Sushi Bars', 'Restaurants']
+Real Categories: 
+['Japanese', 'Restaurants', 'Sushi Bars']
+
+Name: Rancho Pinot
+Predicted Categories: 
+['Mexican', 'Restaurants']
+Real Categories: 
+['American (New)', 'Bars', 
+'Italian', 'Nightlife', 'Restaurants', 
+'Wine Bars']
+\end{verbatim}
+
+\subsection*{Future Work}
+
+There is a lot that can be done to our approach to improve performance. Firstly, we use very little in the way of features. We only use review text and the business name. We can include location information, rating stars, various review attributes, etc. I believe if we had more time and less scrubbed data, we could build a much better performing model. Secondly, we can leverage more complex models and increased number of training data. I limited myself to a small subset of the data in interest of time, but in a real-world environment, we could train longer and possibly see more performance. As an aside, most the concepts and techniques I personally learned was from the Deep Learning \cite{Goodfellow-et-al-2016} textbook. 
+
+\pagebreak
 
 \section*{Task 2 - Deep Recommendation}
 
+In this task, our goal was to apply Youtube's Deep Recommendation approach \cite{youtubedeep} to yelp businesses. We have each User, businesses they've rated, and the stars they gave it in order to hopefully learn a relation between users and businesses, so we can leverage them to make recommendations. 
+
 \subsection*{Data Preprocessing}
+
+Data Preprocessing for this task was reletively simple. As we needed was to merge user ids and business ids together with the stars they gave that business. This means we may have multiple samples of a single user that each contain a different business it has reviewed. Finally since each id is an alphanumeric string, I converted them to a single integer index for training.
 
 \subsection*{Approach and Architecture}
 
+Our approach to generating these recommendations is to learn embeddings for both the user and the business, then concatenate them together so we can feed them into dense layers. As an output, we produce a single integer presenting the stars we believe the user would rate the business. We can then use this stars output to rank each business. (See Architecture Below)
+
+\mbox{}\\
+\begin{verbatim}
+User Embedding Layer (length=50)
+\end{verbatim}
+$+$
+\begin{verbatim}
+Business Embedding Layer (length=50)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Dense Layer (neurons=512)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Dropout Layer (0.2 dropout rate)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Dense Layer (neurons=256)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Dropout Layer (0.2 dropout rate)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Dense Layer (neurons=128)
+\end{verbatim}
+$\downarrow$
+\begin{verbatim}
+Output Layer (single value)
+\end{verbatim}
+\mbox{}\\
+
 \subsection*{Results}
 
-\subsection*{Final Results}
+Below is two randomly sampled users, see the issue?
+
+\begin{verbatim}
+User 1:
+\end{verbatim}
+
+\begin{verbatim}
+User 2:
+\end{verbatim}
+\subsection*{Future Work}
 
 \medskip
 
