@@ -9,6 +9,10 @@ from sklearn.metrics import confusion_matrix
 from tensorflow.keras.models import load_model
 from tqdm import tqdm
 
+# Treat Warnings as errors
+import warnings
+warnings.filterwarnings("error")
+
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 
@@ -69,11 +73,15 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
         recalls.append(recall)
 
         # Matthew's Correlation Coefficient
-        if ((tp*tn) - (fp*fn)) != 0 or (tp+fp)*(tp+fn)*(tn+fp)*(tn+fn) != 0:
-            mcc = ((tp*tn) - (fp*fn)) / np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
-        else:
-            mcc = 0
-        mccs.append(mcc)
+        try:
+            if ((tp*tn) - (fp*fn)) != 0 or (tp+fp)*(tp+fn)*(tn+fp)*(tn+fn) != 0:
+                mcc = ((tp*tn) - (fp*fn)) / np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+            else:
+                mcc = 0
+            mccs.append(mcc)
+        except RuntimeWarning:
+            print(((tp*tn) - (fp*fn)))
+            print((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
     else:
         precisions.append(1)
         recalls.append(1)
