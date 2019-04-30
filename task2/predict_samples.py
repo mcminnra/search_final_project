@@ -48,7 +48,7 @@ X_business_sample = X["business_index"].values
 X["ratings_bar"] = model.predict([X_user_sample, X_business_sample])
 
 # Get top 25 reviews and print
-X = X.sort_values(by=["ratings_bar"], ascending=False).iloc[:25]
+X = X.sort_values(by=["ratings_bar"], ascending=False).iloc[:10]
 
 for i, (index, row) in enumerate(X.iterrows()):
     print(
