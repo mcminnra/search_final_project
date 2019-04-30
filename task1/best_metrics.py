@@ -5,7 +5,7 @@ import time
 
 import numpy as np
 import pandas as pd
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, matthews_corrcoef
 from tensorflow.keras.models import load_model
 from tqdm import tqdm
 
@@ -73,16 +73,8 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
         recalls.append(recall)
 
         # Matthew's Correlation Coefficient
-        try:
-            if ((tp*tn) - (fp*fn)) != 0 or (tp+fp)*(tp+fn)*(tn+fp)*(tn+fn) != 0:
-                mcc = ((tp*tn) - (fp*fn)) / np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
-            else:
-                mcc = 0
-            mccs.append(mcc)
-        except (RuntimeWarning, AttributeError):
-            print(((tp*tn) - (fp*fn)))
-            print((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
-            print(np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn)))
+        mcc = matthews_corrcoef(class_test, class_preds)
+        mccs.append(mcc)
     else:
         precisions.append(1)
         recalls.append(1)
