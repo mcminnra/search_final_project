@@ -12,6 +12,7 @@ from tqdm import tqdm
 # Treat Warnings as errors
 import warnings
 warnings.filterwarnings("error", category=RuntimeWarning)
+warnings.filterwarnings("error", category=AttributeError)
 
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
