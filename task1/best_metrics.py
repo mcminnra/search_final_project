@@ -31,7 +31,7 @@ model = load_model("weights/model.h5")
 y_preds = model.predict(X_test)
 
 # Round percents to binary labeling
-for i, row in enumerate(y_preds):
+for i, row in tqdm(enumerate(y_preds), desc='Converting to binary labeling'):
     for j, category in enumerate(row):
         y_preds[i][j] = np.round(category, 0)
 
