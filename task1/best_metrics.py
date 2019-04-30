@@ -53,10 +53,10 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
     cm = confusion_matrix(class_test, class_preds)
 
     if len(cm) != 1:
-        tp = np.int64(cm[0][0])
-        fp = np.int64(cm[0][1])
-        tn = np.int64(cm[1][1])
-        fn = np.int64(cm[1][0])
+        tp = np.uint64(cm[0][0])
+        fp = np.uint64(cm[0][1])
+        tn = np.uint64(cm[1][1])
+        fn = np.uint64(cm[1][0])
 
         # Precision
         if tp == 0 and fp == 0:
