@@ -57,31 +57,26 @@ for i in tqdm(range(0, num_categories), desc="Getting Metrics"):
     class_preds = y_preds[:, i]
     class_test = y_test[:, i]
 
-    if len(cm) != 1:
-        # Precision
-        try:
-            precision = precision_score(class_test, class_preds, average='macro')
-        except RuntimeWarning:
-            precision = 0
-        precisions.append(precision)
+    # Precision
+    try:
+        precision = precision_score(class_test, class_preds, average='macro')
+    except RuntimeWarning:
+        precision = 0
+    precisions.append(precision)
 
-        # Recall
-        try:
-            recall = recall_score(class_test, class_preds, average='macro')
-        except RuntimeWarning:
-            recall = 0
-        recalls.append(recall)
+    # Recall
+    try:
+        recall = recall_score(class_test, class_preds, average='macro')
+    except RuntimeWarning:
+        recall = 0
+    recalls.append(recall)
 
-        # Matthew's Correlation Coefficient
-        try:
-            mcc = matthews_corrcoef(class_test, class_preds)
-        except RuntimeWarning:
-            mcc = 0
-        mccs.append(mcc)
-    else:
-        precisions.append(1)
-        recalls.append(1)
-        mccs.append(1)
+    # Matthew's Correlation Coefficient
+    try:
+        mcc = matthews_corrcoef(class_test, class_preds)
+    except RuntimeWarning:
+        mcc = 0
+    mccs.append(mcc)
 
 avg_precision = np.mean(precisions)
 avg_recall = np.mean(recalls)

@@ -42,7 +42,9 @@ rmcminn@iu.edu
 \maketitle
 
 \begin{abstract}
-	Code located here:\\ \url{https://github.com/mcminnra/search_final_project}
+	Code located here:\\ \url{https://github.com/mcminnra/search_final_project}\\
+	
+	I did this project solo, so all work is my own. 
 \end{abstract}
 
 \section*{Introduction}
@@ -232,27 +234,43 @@ Below is two randomly sampled users, see the issue?
 \begin{verbatim}
 User 1:
 
-uinSSSD4iQVZeTg-VMumhQ:: Eric
-1:: Precision Window Tint (Henderson, NV) - 4.59
-2:: Gelatology (Las Vegas, NV) - 4.54
-3:: Battlefield Vegas (Las Vegas, NV) - 4.54
-4:: DC Auto Luxury Window Tinting (Las Vegas, NV) - 4.54
-5:: HydroCare Services (Phoenix, AZ) - 4.53
-6:: Noble Carpet Cleaners (Las Vegas, NV) - 4.53
-7:: Las Vegas Spaw (Las Vegas, NV) - 4.53
-8:: Insectek Pest Solutions (Phoenix, AZ) - 4.53
-9:: Cheba Hut Toasted Subs (Las Vegas, NV) - 4.52
-10:: La Maison de Maggie (Las Vegas, NV) - 4.52
+smNH7VoP8GI4RMpkM3JFLw:: Pablo
+1:: Precision Window Tint - 4.56
+2:: Battlefield Vegas - 4.51
+3:: Gelatology - 4.51
+4:: Insectek Pest Solutions - 4.51
+5:: DC Auto Luxury Window Tinting - 4.51
+6:: Las Vegas Spaw - 4.51
+7:: HydroCare Services - 4.5
+8:: Noble Carpet Cleaners - 4.5
+9:: Cheba Hut Toasted Subs - 4.5
+10:: La Maison de Maggie - 4.49
 \end{verbatim}
 \mbox{}\\
 
 \mbox{}\\
 \begin{verbatim}
 User 2:
+
+A56wp0Eeaz_x5ZDDGiW_EQ:: Kjelsey
+1:: Precision Window Tint - 4.51
+2:: Battlefield Vegas - 4.48
+3:: Gelatology - 4.47
+4:: Insectek Pest Solutions - 4.47
+5:: Las Vegas Spaw - 4.47
+6:: HydroCare Services - 4.47
+7:: DC Auto Luxury Window Tinting - 4.47
+8:: Noble Carpet Cleaners - 4.46
+9:: Cheba Hut Toasted Subs - 4.46
+10:: La Maison de Maggie - 4.46
 \end{verbatim}
 \mbox{}\\
 
+They are recommended the same thing!  The issue I'm finding is that we don't have enough reviews for each user. Each user only reviews a few businesses, so the model has trouble learning their preferences only on a few examples. This has the effect of recommending them the best businesses because we don't have enough data per user to figure out what they like. The algorithm is working correctly, it's just that the data is unfortunately not suited to this type of problem. This approach works well when each user has many interactions with the system, so it is better able to learn the preferences of that particular user. It doesn't work so well when we have only a few examples. 
+
 \subsection*{Future Work}
+
+There are a couple of fixes to this problem. Firsly, we can reframe the problem as a probability. Instead of outputting a starts number, we can output a probability that a user will like a business. This requires to invent a heuristic that is able to tell whether a user likes a business or not. For example, we may say that a review of greater than 4 starts is a 'like' and less than 4 starts is a 'dislike'. This will allow us ot rank on the probability and hopefully give us a simplier metric to learn upon which may be able to capture the differences between users easier. Secondly, we can add more data and features. In Youtube's paper they use many more data sources to do recommendation. For our problem, we can add information such as location data, review attributes, etc. This can allow us to have more information to learn upon which may offer better recommendations. Thirdly, we can narrow our scope. Instead of trying to recommendation on a set of all businesses, we may approach the problem by recommending a subset like Steakhouses or Barbershops. This can allow us to learn more specific results and hope provide more accurate recommendations within that context. However, I ran out of time to try any of this. I wish I had more time with this project because I think this approach is very interesting and can be very successful. I just needed more time to refine it, so that it can provide better recommendations
 
 \medskip
 

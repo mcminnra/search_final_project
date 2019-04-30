@@ -16,6 +16,11 @@ There is a script that makes predictions on a subsample of the test set to see h
 make samples
 ```
 
+There is a script that generates output metrics of the model from training
+```bash
+make metrics
+```
+
 ## Results
 
 Task 1 is trained on all the businesses in the dataset, and 1,000,000 reviews. 
