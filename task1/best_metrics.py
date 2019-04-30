@@ -82,6 +82,7 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
         except (RuntimeWarning, AttributeError):
             print(((tp*tn) - (fp*fn)))
             print((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+            print(np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn)))
     else:
         precisions.append(1)
         recalls.append(1)
