@@ -12,7 +12,6 @@ from tqdm import tqdm
 # Treat Warnings as errors
 import warnings
 warnings.filterwarnings("error", category=RuntimeWarning)
-warnings.filterwarnings("error", category=AttributeError)
 
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
@@ -80,7 +79,7 @@ for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
             else:
                 mcc = 0
             mccs.append(mcc)
-        except RuntimeWarning:
+        except (RuntimeWarning, AttributeError):
             print(((tp*tn) - (fp*fn)))
             print((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
     else:
