@@ -108,6 +108,13 @@ Predicted Categories: ['Mexican', 'Restaurants']
 Real Categories: ['American (New)', 'Bars', 'Italian', 'Nightlife', 'Restaurants', 'Wine Bars']
 Percent Overlap: 0.1667
 
+Number of Samples: 200
+Loss: 0.016085141636431217
+Accuracy: 0.9964883923530579
+Average Precisions across all classes: 0.9992307692307693
+Average Recalls across all classes: 0.9959807692307693
+Average MCC across all classes: 0.8138461538461539
+
 Cites:
 - https://www.aclweb.org/anthology/D14-1181
 

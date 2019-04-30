@@ -5,8 +5,9 @@ import time
 
 import numpy as np
 import pandas as pd
-from tensorflow.keras.models import load_model
 from sklearn.metrics import confusion_matrix
+from tensorflow.keras.models import load_model
+from tqdm import tqdm
 
 # MacOS Fix
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
@@ -44,7 +45,7 @@ print(f'Number of Samples: {num_samples}')
 precisions = []
 recalls = []
 mccs = []
-for i in range(0, num_categories):
+for i in tqdm(range(0, num_categories), desc='Getting Metrics'):
     class_preds = y_preds[:, i]
     class_test = y_test[:, i]
     cm = confusion_matrix(class_test, class_preds)
@@ -79,7 +80,7 @@ for i in range(0, num_categories):
         precisions.append(1)
         recalls.append(1)
         mccs.append(1)
-    
+
 avg_precision = np.mean(precisions)
 avg_recall = np.mean(recalls)
 avg_mcc = np.mean(mccs)
