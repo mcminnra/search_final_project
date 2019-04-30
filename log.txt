@@ -127,3 +127,6 @@ Single 128 dense:
 Train Loss: 1.6768
 
 512->do(.2)->256->do(.2)->128
+Epoch 00012: early stopping
+Train Loss: 1.4221
+Total Training Time: 15927.32 seconds

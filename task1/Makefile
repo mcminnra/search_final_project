@@ -8,3 +8,6 @@ train:
 
 samples:
 	python3 predict_samples.py
+
+metrics:
+	python3 best_metrics.py
